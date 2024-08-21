@@ -1,0 +1,290 @@
+﻿<Window x:Class="WeatherApp.View.MainAppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherApp.View"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:local1="clr-namespace:WeatherApp.Model"
+        xmlns:vm="clr-namespace:WeatherApp.ViewModel"
+        xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:wi1="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="MainAppWindow" Height="800" Width="1250" WindowStartupLocation="CenterScreen"  
+        ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"  Background="Transparent" x:Name="Window">
+    <Window.Resources>
+        <local1:PathConverter x:Key="PathConverter"/>
+        <local1:WeatherIconConverter x:Key="WeatherIconConverter"/>
+        <local1:ConditionConverter x:Key="ConditionConverter"/>
+        <local1:WindDirConverter x:Key="WindDirConverter"/>
+        <local1:DayOfWeekConverter x:Key="DayOfWeekConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainViewModel x:Name="ViewModel"></vm:MainViewModel>
+    </Window.DataContext>
+    <Border x:Name="Wnd" Height="800" Width="1250" CornerRadius="20" 
+            MouseDown="Border_MouseDown" Background="Gray">
+        <Grid x:Name="MainArea">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="625"/>
+                <ColumnDefinition Width="500"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="70"/>
+                <RowDefinition Height ="30"/>
+                <RowDefinition Height ="700"/>
+            </Grid.RowDefinitions>
+
+            <Image Margin="22,6,-3,14" Grid.RowSpan="4" Grid.ColumnSpan="3" x:Name="Background"  Source="{Binding Background, Converter={StaticResource PathConverter}}"  >
+                <Image.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Rectangle Margin="10" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="rectangle"  Fill="Black" Stroke="Black" RadiusX="20" RadiusY="20" 
+                            Width="1250" Height="800"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Image.OpacityMask>
+            </Image>
+            <Button Command="{Binding MainWindowClosingCommand}" CommandParameter="{Binding ElementName=Window}" BorderBrush="Transparent" HorizontalAlignment="Right" 
+                    Margin="10" Background="Transparent" Grid.Row="0" Grid.Column="2" >
+                <Button.Content>
+                    <Image Height="50" Width="50" Source="/Resources/ThemeImages/close.png"/>
+                </Button.Content>
+            </Button>
+            <Border Background="{StaticResource BorderBackground}"  Grid.Row="2" Grid.Column="1" Margin="20" CornerRadius="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Image Height="100" Width="80" Grid.Row="0" Margin="5"  Source="{Binding Path=WeatherResponce.fact.icon, Converter={StaticResource WeatherIconConverter}}"/>
+                    <TextBlock FontSize="30" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                        <Run Text="{Binding Region, StringFormat={}{0}:}"/>
+                        <Run Text="{Binding Path=WeatherResponce.fact.condition, Converter={StaticResource ConditionConverter}}"/>
+                    </TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.temp, StringFormat='Температура: {0}°C'}" Grid.Row="2"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.feels_like, StringFormat='Ощущаемая температура: {0}°C'}" Grid.Row="3"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.wind_speed, StringFormat='Скорость ветра: {0} м/c'}" Grid.Row="4"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.wind_dir, Converter={StaticResource WindDirConverter}, StringFormat='Направление ветра: {0}'}" Grid.Row="5"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.pressure_mm, StringFormat='Давление: {0} мм рт.ст'}" Grid.Row="6"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.humidity, StringFormat='Влажность воздуха: {0}%'}" Grid.Row="7"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.daytime, StringFormat='Время суток: {0}'}" Grid.Row="8"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.prec_type, StringFormat='Тип осадков: {0}'}" Grid.Row="9"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.prec_strength, StringFormat='Сила осадков: {0}'}" Grid.Row="10"></TextBlock>
+                    <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Top"  Text="{Binding Path=WeatherResponce.fact.cloudness, StringFormat='Облачность: {0}'}" Grid.Row="11"></TextBlock>
+                </Grid>
+            </Border>
+            <Border  Background="{StaticResource BorderBackground}" Grid.Row="2" Grid.Column="2" Margin="20" CornerRadius="20">
+                <ListBox x:Name="forecasts" Grid.ColumnSpan="3" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="Transparent" 
+                         ItemsSource="{Binding Path=WeatherResponce.forecasts}" BorderBrush="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"></RowDefinition>
+                                        <RowDefinition Height="40"></RowDefinition>
+                                        <RowDefinition Height="40"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <ListBox SelectedItem="{Binding Source={x:Reference Name=ViewModel}, Path=SelectedHour}" x:Name="HoursListBox" Grid.Row="1" Grid.RowSpan="2"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                                             ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="Transparent" Background="Transparent"  ItemsSource="{Binding Path=hours}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                
+                                                <Button Command="{Binding Source={x:Reference Name=ViewModel}, Path=Command}" x:Name="WeatherForecastbtn" Height="60" Width="60" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource DockBtnStyle}">
+                                                    <Button.Background>
+                                                        <ImageBrush AlignmentX="Center" AlignmentY="Center" ImageSource="{Binding Path=icon, Converter={StaticResource WeatherIconConverter}}"/>
+                                                    </Button.Background>
+                                                    <Button.Triggers>
+                                                        <EventTrigger RoutedEvent="Button.Click">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation From="20,60,20,-1600" To="20,0,20,0" Storyboard.Target="{Binding Source={x:Reference Name=ForecastPanel}}" 
+                                                    Storyboard.TargetProperty="Margin" Duration="0:0:0.3">
+                                                                        <ThicknessAnimation.EasingFunction>
+                                                                            <QuadraticEase EasingMode="EaseOut" />
+                                                                        </ThicknessAnimation.EasingFunction>
+                                                                    </ThicknessAnimation>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+
+                                                    </Button.Triggers>
+                                                    <Popup Width="70" 
+                                                           HorizontalOffset="-12" 
+                                                           PlacementTarget="{Binding ElementName=WeatherForecastbtn}"
+                                                           IsOpen="{Binding ElementName=WeatherForecastbtn, Path=IsMouseOver, Mode=OneWay}"
+                                                           Style="{StaticResource PopupStyle}">
+                                                        <Grid>
+                                                            <Border Style="{StaticResource border}">
+                                                                <TextBlock Text="{Binding Path=hour, StringFormat='{}{0}:00'}" Style="{StaticResource PopupText}"/>
+                                                            </Border>
+                                                            <Path Style="{StaticResource ArrowPath}"/>
+                                                        </Grid>
+                                                    </Popup>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel  Height="80" Background="Transparent"></WrapPanel>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="IsSelected" Value="{Binding Content.IsSelected, Mode=TwoWay, RelativeSource={RelativeSource Self}}"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <ContentPresenter/>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                                        <Setter Property="IsSelected" Value="True"></Setter>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                    </ListBox>
+                                    <TextBlock Margin="5" FontSize="15" Grid.Column="2" Text="{Binding Path=date, Converter={StaticResource DayOfWeekConverter}}"></TextBlock>
+                                </Grid>
+                            </ScrollViewer>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsSelected" Value="{Binding Content.IsSelected, Mode=TwoWay, RelativeSource={RelativeSource Self}}"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+
+            <Button Style="{StaticResource ButtonEllipseStyle}" Grid.Row="0"  Height="50" Width="50" Grid.Column="1"  x:Name="Searchbtn" Margin="538,30,37,10" Grid.RowSpan="2">
+                <Button.Content>
+                    <Image Height="25" Source="/Resources/ThemeImages/up-arrow.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180.386"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button.Content>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation From="538, 30, 37, 10" To="538, -140, 37, 10" Storyboard.TargetProperty="Margin" Duration="0:0:0.2">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut" />
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation From="20, -75, 20, 85" To="20, 0, 20, 0" Storyboard.Target="{Binding Source={x:Reference Name=SearchPanel}}" Storyboard.TargetProperty="Margin" Duration="0:0:0.2">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut" />
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <TextBox Height="50"  Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" x:Name="SearchPanel" TextWrapping="Wrap" 
+                     Grid.Row="0"  
+                     Style ="{StaticResource TextBoxStyle}" Grid.Column="1" Grid.ColumnSpan="2" ui:ControlHelper.PlaceholderText="Поиск: "  FontSize="25" Margin="40, -75, 40, 85" Grid.RowSpan="2">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchEnterClickCommand}"/>
+                </TextBox.InputBindings>
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation From="20, 0, 20, 0" To="20, -75, 20, 85" Storyboard.TargetProperty="Margin" Duration="0:0:0.2">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut" />
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation From="538, -140, 37, 10" To="538, 30, 37, 10" Storyboard.TargetName="Searchbtn" Storyboard.TargetProperty="Margin" Duration="0:0:0.2">
+                                    <ThicknessAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut" />
+                                    </ThicknessAnimation.EasingFunction>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
+            <Border x:Name="ForecastPanel" Height="800" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,0,20,-1600" CornerRadius="20" Background="White" Grid.Row="0" Grid.RowSpan="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Button Style="{StaticResource ButtonEllipseBlackStyle}" Margin="10" Grid.Row="0"  Height="30" Width="30" HorizontalAlignment="Right" x:Name="ForecastPanelClosebtn" >
+                        <Button.Content>
+                            <Image Height="20" Source="/Resources/ThemeImages/down-chevron.png"/>
+                        </Button.Content>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation From="20,0,20,0" To="20,60,20,-1600" Storyboard.TargetName="ForecastPanel" 
+                                                    Storyboard.TargetProperty="Margin" Duration="0:0:0.3">
+                                            <ThicknessAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseOut" />
+                                            </ThicknessAnimation.EasingFunction>
+                                        </ThicknessAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <TextBlock Grid.Row="1" Text="{Binding SelectedHour.hour}"/>
+                </Grid>
+            </Border>
+            
+            
+        </Grid>
+    </Border>
+</Window>

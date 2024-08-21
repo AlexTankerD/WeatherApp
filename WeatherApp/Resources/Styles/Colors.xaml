@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BorderBackground">
+        <SolidColorBrush.Color>
+            <Color A="180" G="255" R="255" B="255"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="BlueColor">
+        <SolidColorBrush.Color>
+            <Color A="255" G="217" R="102" B="255"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="BlueAccentuated">
+        <SolidColorBrush.Color>
+            <Color A="255" G="191" R="0" B="255"/>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+</ResourceDictionary>

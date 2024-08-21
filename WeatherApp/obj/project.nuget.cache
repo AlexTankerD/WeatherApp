@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "t3Bv0Mz4BWhdKehP8XGioDJQ2O1RWWolWvuBl8xKxl9CLcbM4xVUnOCnsXSEQ0M3b1hj/2RUsWAGaFjskl5yxQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sasha\\source\\repos\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sasha\\.nuget\\packages\\modernwpfui\\0.9.6\\modernwpfui.0.9.6.nupkg.sha512",
+    "C:\\Users\\sasha\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

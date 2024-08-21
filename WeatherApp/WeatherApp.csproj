@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Json\StartupProgram.json" />
+    <None Remove="Resources\ThemeImages\close.png" />
+    <None Remove="Resources\ThemeImages\down-arrow.png" />
+    <None Remove="Resources\ThemeImages\down-chevron.png" />
+    <None Remove="Resources\ThemeImages\up-arrow.png" />
+    <None Remove="Resources\WeatherIcons\bkn_+ra_d.png" />
+    <None Remove="Resources\WeatherIcons\bkn_+ra_n.png" />
+    <None Remove="Resources\WeatherIcons\bkn_-ra_d.png" />
+    <None Remove="Resources\WeatherIcons\bkn_-ra_n.png" />
+    <None Remove="Resources\WeatherIcons\bkn_d.png" />
+    <None Remove="Resources\WeatherIcons\bkn_n.png" />
+    <None Remove="Resources\WeatherIcons\bkn_ra_d.png" />
+    <None Remove="Resources\WeatherIcons\bkn_ra_n.png" />
+    <None Remove="Resources\WeatherIcons\ovc.png" />
+    <None Remove="Resources\WeatherIcons\ovc_+ra.png" />
+    <None Remove="Resources\WeatherIcons\ovc_-ra.png" />
+    <None Remove="Resources\WeatherIcons\ovc_-sn.png" />
+    <None Remove="Resources\WeatherIcons\ovc_ra.png" />
+    <None Remove="Resources\WeatherIcons\skc_d.png" />
+    <None Remove="Resources\WeatherIcons\skc_n.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Json\StartupProgram.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\ThemeImages\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\down-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\down-chevron.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ThemeImages\up-arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_+ra_d.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_+ra_n.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_-ra_d.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_-ra_n.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_d.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_n.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\bkn_ra_n.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\ovc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\ovc_+ra.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\ovc_-ra.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\ovc_-sn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\ovc_ra.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\skc_d.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WeatherIcons\skc_n.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net7.0-windows\Resources\Backgrounds\" />
+    <Folder Include="Resources\Backgrounds\" />
+  </ItemGroup>
+
+</Project>
